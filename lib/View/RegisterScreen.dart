@@ -9,7 +9,11 @@ import '../Common/ImageShade.dart';
 import '../Common/RoundButton.dart';
 
 class RegisterScreen extends StatelessWidget {
-  const RegisterScreen({super.key});
+  RegisterScreen({super.key});
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -58,15 +62,18 @@ class RegisterScreen extends StatelessWidget {
                             .color(Colors.white)
                             .make()
                             .py(20),
-                        const Field(
+                        Field(
+                          controller: emailController,
                           hinttext: "Enter Email",
                           suffixIcon: Icons.email,
                         ).pOnly(bottom: 20),
-                        const Field(
+                        Field(
+                          controller: nameController,
                           hinttext: "Full Name",
                           suffixIcon: Icons.person,
                         ).pOnly(bottom: 20),
-                        const Field(
+                        Field(
+                          controller: passwordController,
                           hinttext: "Enter Password",
                           suffixIcon: Icons.visibility,
                         ).pOnly(bottom: 10),
@@ -77,14 +84,14 @@ class RegisterScreen extends StatelessWidget {
                                 .color(Colors.white)
                                 .make(),
                             "Login".text.white.underline.make().onTap(() {
-                              Get.to(() => const LoginScren());
+                              Get.to(() => LoginScreen());
                             })
                           ],
                         ).pOnly(bottom: 20),
                         RoundButton(
                             text: " Register ",
                             onpress: () {
-                              Get.to(() => LoginScren());
+                              Get.to(() => LoginScreen());
                             }).pOnly(bottom: 20),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -160,18 +167,20 @@ class SocialIcon extends StatelessWidget {
 }
 
 class Field extends StatelessWidget {
-  const Field({
-    super.key,
-    this.hinttext,
-    required this.suffixIcon,
-  });
+  const Field(
+      {super.key,
+      this.hinttext,
+      required this.suffixIcon,
+      required this.controller});
   // ignore: prefer_typing_uninitialized_variables
   final hinttext;
   final IconData suffixIcon;
+  final controller;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       decoration: InputDecoration(
         hintText: "$hinttext",
         contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 8),

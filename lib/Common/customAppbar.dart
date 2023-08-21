@@ -6,15 +6,17 @@ class CustomAppBar extends StatelessWidget {
   CustomAppBar(
       {super.key,
       required this.leadingicon,
-      required this.title,
+      this.title,
+      this.height = 140,
       this.gridView,
       this.column});
 
   final IconData leadingicon;
 
-  final Widget title;
+  final Widget? title;
   final Widget? column;
   final GridView? gridView;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class CustomAppBar extends StatelessWidget {
               borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(40),
                   bottomRight: Radius.circular(40))),
-          expandedHeight: 140,
+          expandedHeight: height,
           leading: Icon(
             leadingicon,
             color: Colors.red,
@@ -50,7 +52,7 @@ class CustomAppBar extends StatelessWidget {
               size: 30,
               color: Colors.white,
             ).pOnly(right: 5),
-            CircleAvatar(
+            const CircleAvatar(
               radius: 18,
               backgroundColor: Colors.white,
               child: CircleAvatar(

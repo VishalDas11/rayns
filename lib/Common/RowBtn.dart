@@ -29,13 +29,13 @@ class RowBtn extends StatelessWidget {
                 color: Color(0xFF031A28),
                 borderRadius: BorderRadius.circular(30),
                 border: Border.all(color: Colors.white),
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(blurRadius: 1, color: Colors.white),
                 ]),
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.arrow_back,
                     color: Colors.white,
                   ),
@@ -52,14 +52,14 @@ class RowBtn extends StatelessWidget {
                 color: Colors.red,
                 borderRadius: BorderRadius.circular(30),
                 border: Border.all(color: Colors.white),
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(blurRadius: 1, color: Colors.white),
                 ]),
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   "$text2".text.color(Colors.white).make(),
-                  Icon(
+                  const Icon(
                     Icons.arrow_forward,
                     color: Colors.white,
                   ),

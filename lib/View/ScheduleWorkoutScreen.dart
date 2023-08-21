@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:raynworkout/View/CounterDownTimer.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -7,7 +9,7 @@ import '../Common/customAppbar.dart';
 import '../api services/Color.dart';
 
 class ScheduleWorkOutScreen extends StatefulWidget {
-  ScheduleWorkOutScreen({super.key});
+  const ScheduleWorkOutScreen({super.key});
 
   @override
   State<ScheduleWorkOutScreen> createState() => _ScheduleWorkOutScreenState();
@@ -24,103 +26,63 @@ class _ScheduleWorkOutScreenState extends State<ScheduleWorkOutScreen> {
       backgroundColor: AppColor.screenbackgroundColor,
       body: CustomAppBar(
         leadingicon: Icons.arrow_back,
-        title: Text("Schedule Workout "),
+        title: const Text("Schedule Workout "),
         column: Column(
           children: [
+            //  Calender
             calender(),
-            Stack(
-              children: [
-                Container(
-                  padding: EdgeInsets.all(20),
-                  margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-                  decoration: BoxDecoration(
-                      color: AppColor.calenderColor,
-                      borderRadius: BorderRadius.circular(20)),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      "Daily Schedule"
-                          .text
-                          .white
-                          .size(22)
-                          .make()
-                          .pOnly(bottom: 10),
-                      const CustomRow(
-                              text1: "  08:30  Warm-Up",
-                              text2: "  | Personal Training ")
-                          .pOnly(bottom: 12),
-                      const CustomRow(
-                              text1: "  12:00  Warm-Up",
-                              text2: "  | Online Traning ")
-                          .pOnly(bottom: 12),
-                      const CustomRow(
-                              text1: "  18:30  Warm-Up",
-                              text2: "  | Personal Training ")
-                          .pOnly(bottom: 12),
-                      const CustomRow(
-                              text1: "  21:00  Warm-Up",
-                              text2: "  | Personal Training ")
-                          .pOnly(bottom: 12)
-                    ],
-                  ),
-                ),
-                Positioned(
-                  right: 15,
-                  bottom: 90,
-                  child: Container(
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                        color: Colors.white, shape: BoxShape.circle),
-                    child: Icon(
-                      Icons.add,
-                      color: Colors.red,
-                    ).centered(),
-                  ),
-                )
-              ],
-            ),
-            RoundButton(text: "Start Workout Now", onpress: () {}).px(30).py(20)
+
+            // daily schedule session
+            dailySchedule(),
+
+            // Round Button
+            RoundButton(
+                text: "Start Workout Now",
+                onpress: () {
+                  Get.to(() => CounterScreen());
+                }).px(30).py(20)
           ],
         ),
       ),
     );
   }
 
+  // Calender
+
   Widget calender() {
     return Container(
-      padding: EdgeInsets.all(10),
-      margin: EdgeInsets.all(30),
+      padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.all(30),
       decoration: BoxDecoration(
           color: AppColor.calenderColor,
           borderRadius: BorderRadius.circular(30)),
       child: TableCalendar(
         rowHeight: 35,
-        daysOfWeekStyle: DaysOfWeekStyle(
+        daysOfWeekStyle: const DaysOfWeekStyle(
             weekdayStyle: TextStyle(color: Colors.white70),
             weekendStyle: TextStyle(color: Colors.white70)),
         calendarFormat: CalendarFormat.month,
         calendarStyle: CalendarStyle(
-            weekendTextStyle: TextStyle(color: Colors.white70),
-            defaultTextStyle: TextStyle(color: Colors.white70),
-            todayTextStyle: TextStyle(color: Colors.red),
-            todayDecoration: BoxDecoration(
+            weekendTextStyle: const TextStyle(color: Colors.white70),
+            defaultTextStyle: const TextStyle(color: Colors.white70),
+            todayTextStyle: const TextStyle(color: Colors.red),
+            todayDecoration: const BoxDecoration(
               shape: BoxShape.circle,
               color: Colors.white,
             ),
-            selectedTextStyle: TextStyle(color: Colors.white),
+            selectedTextStyle: const TextStyle(color: Colors.white),
             outsideDaysVisible: false,
             tableBorder: TableBorder(borderRadius: BorderRadius.circular(20))),
         locale: "en_US",
         headerStyle: HeaderStyle(
-            titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
+            titleTextStyle: const TextStyle(color: Colors.white, fontSize: 20),
             formatButtonVisible: false,
             titleCentered: true,
-            leftChevronIcon: Icon(
+            leftChevronIcon: const Icon(
               Icons.arrow_back_ios,
               color: Colors.white,
             ),
-            rightChevronIcon: Icon(
+            rightChevronIcon: const Icon(
               Icons.arrow_forward_ios,
               color: Colors.white,
             ),
@@ -143,6 +105,54 @@ class _ScheduleWorkOutScreenState extends State<ScheduleWorkOutScreen> {
   }
 }
 
+//  Daily Schedule
+Stack dailySchedule() {
+  return Stack(
+    children: [
+      Container(
+        padding: const EdgeInsets.all(20),
+        margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+        decoration: BoxDecoration(
+            color: AppColor.calenderColor,
+            borderRadius: BorderRadius.circular(20)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            "Daily Schedule".text.white.size(22).make().pOnly(bottom: 10),
+            const CustomRow(
+                    text1: "  08:30  Warm-Up", text2: "  | Personal Training ")
+                .pOnly(bottom: 12),
+            const CustomRow(
+                    text1: "  12:00  Warm-Up", text2: "  | Online Traning ")
+                .pOnly(bottom: 12),
+            const CustomRow(
+                    text1: "  18:30  Warm-Up", text2: "  | Personal Training ")
+                .pOnly(bottom: 12),
+            const CustomRow(
+                    text1: "  21:00  Warm-Up", text2: "  | Personal Training ")
+                .pOnly(bottom: 12)
+          ],
+        ),
+      ),
+      Positioned(
+        right: 15,
+        bottom: 90,
+        child: Container(
+          padding: const EdgeInsets.all(10),
+          decoration:
+              const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+          child: const Icon(
+            Icons.add,
+            color: Colors.red,
+          ).centered(),
+        ),
+      )
+    ],
+  );
+}
+
+// customRow whcih is used in daily schedule session
 class CustomRow extends StatelessWidget {
   const CustomRow({super.key, required this.text1, required this.text2});
 

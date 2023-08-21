@@ -74,6 +74,7 @@ class HomeScreen extends StatelessWidget {
                       .size(18)
                       .make(),
                   trailing: "Mon 25 Apr".text.color(Colors.white).make(),
+                  contentPadding: EdgeInsets.symmetric(horizontal: 0),
                 ),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
@@ -100,16 +101,17 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ).pOnly(bottom: 10),
                 ),
-
+                //todo ListTile
                 tile(context),
-                // TODO  TabBar
+                //  TabBar
                 Container(
-                  height: 25,
+                  height: 20,
                   width: double.infinity,
                   decoration: BoxDecoration(
                       color: Colors.black45,
                       borderRadius: BorderRadius.circular(30)),
                   child: TabBar(
+                      labelStyle: const TextStyle(fontSize: 12),
                       indicator: BoxDecoration(
                           borderRadius: BorderRadius.circular(40),
                           color: Colors.red),
@@ -146,5 +148,6 @@ Widget tile(BuildContext context) {
   return ListTile(
     leading: "Workout Categeries".text.size(18).color(Colors.white).make(),
     trailing: "See All".text.color(Colors.white).make(),
+    contentPadding: EdgeInsets.symmetric(horizontal: 0),
   );
 }

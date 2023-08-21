@@ -6,14 +6,9 @@ import 'package:velocity_x/velocity_x.dart';
 import '../Common/ImageShade.dart';
 import 'loginScreen.dart';
 
-class GetStartedScreen extends StatefulWidget {
+class GetStartedScreen extends StatelessWidget {
   const GetStartedScreen({super.key});
 
-  @override
-  State<GetStartedScreen> createState() => _GetStartedScreenState();
-}
-
-class _GetStartedScreenState extends State<GetStartedScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +52,7 @@ class Btn extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        Get.to(() => const LoginScren());
+        Get.to(() => LoginScreen());
       },
       style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 18),

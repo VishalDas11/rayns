@@ -15,9 +15,9 @@ class WorkoutPlanScreen2 extends StatelessWidget {
       backgroundColor: AppColor.screenbackgroundColor,
       body: CustomAppBar(
           leadingicon: Icons.arrow_back,
-          title: Text("Workout Plan"),
-          column: Padding(
-            padding: const EdgeInsets.only(top: 30),
+          title: const Text("Workout Plan"),
+          column: const Padding(
+            padding: EdgeInsets.only(top: 30),
             child: Column(children: [
               Tile(),
               Tile(),

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:raynworkout/api%20services/GetxProvider.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../Common/ImageShade.dart';
@@ -62,14 +63,14 @@ class GoalScreen extends StatelessWidget {
                       SizedBox(
                               // width: MediaQuery.of(context).size.width * 1 / 3,
                               height: 280,
-                              child: const GoalList())
+                              child: GoalList())
                           .centered(),
                       RowBtn(
                         onpress: () {
                           Get.back();
                         },
                         onpress2: () {
-                          Get.to(ActivityScreen());
+                          Get.to(() => const ActivityScreen());
                         },
                       )
                     ]).px(20).py(10),
@@ -82,48 +83,45 @@ class GoalScreen extends StatelessWidget {
   }
 }
 
-class GoalList extends StatefulWidget {
-  const GoalList({super.key});
+class GoalList extends StatelessWidget {
+  GoalList({super.key});
 
-  @override
-  State<GoalList> createState() => _GoalListState();
-}
+  Controller getxcontroller = Get.put(Controller());
 
-class _GoalListState extends State<GoalList> {
-  final list = [
-    'Gain Weight',
-    'Loss Weight',
-    'Get filter',
-    'Gain More Flexible',
-    'Learn the bascis',
-  ];
-  int index = 0;
+  // final list = [
   @override
   Widget build(BuildContext context) {
-    return CupertinoPicker(
-      itemExtent: 60,
-      // squeeze: 1.5,
-      // looping: true,
-      children: list
-          .map((item) => Center(
-                child: Text(
-                  item,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
+    print("Build string");
+    return Obx(() {
+      return CupertinoPicker(
+        itemExtent: 60,
+        scrollController: FixedExtentScrollController(initialItem: 2),
+        onSelectedItemChanged: (index) {
+          getxcontroller.update();
+        },
+        // squeeze: 1.5,
+        // looping: true,
+        children: getxcontroller.goalList
+            .map((item) => Center(
+                  child: Text(
+                    item,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                    ),
                   ),
-                ),
-              ))
-          .toList(),
-      scrollController: FixedExtentScrollController(initialItem: 2),
+                ))
+            .toList(),
 
-      onSelectedItemChanged: (index) {
-        setState(() {
-          this.index = index;
-        });
-        final item = list[index];
-        print("Selected item is : ${item}");
-      },
-    );
+        // onSelectedItemChanged: (index) {
+        //   // setState(() {
+        //   //   this.index = index;
+        //   // });
+        //   get
+        //   final item = list[index];
+        //   print("Selected item is : ${item}");
+        // },
+      );
+    });
   }
 }

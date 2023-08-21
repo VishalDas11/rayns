@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../Common/customAppbar.dart';
 import '../api services/Color.dart';
+import 'ScheduleWorkoutScreen.dart';
 
 // ignore: must_be_immutable
 class WeekOne extends StatelessWidget {
@@ -16,7 +18,7 @@ class WeekOne extends StatelessWidget {
       backgroundColor: AppColor.screenbackgroundColor,
       body: CustomAppBar(
           leadingicon: Icons.arrow_back,
-          title: Text("Guardians of the Grains "),
+          title: const Text("Guardians of the Grains "),
           column: Padding(
             padding: const EdgeInsets.only(top: 30, right: 10, left: 10),
             child: Column(children: [
@@ -76,7 +78,7 @@ class WeekOne extends StatelessWidget {
           ],
         ),
         onTap: () {
-          // Get.to(() => ScheduleWorkOutScreen());
+          Get.to(() => const ScheduleWorkOutScreen());
         },
       ),
     );

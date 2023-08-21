@@ -33,7 +33,7 @@ class WeeklyPlanScreen extends StatelessWidget {
             shrinkWrap: true,
             itemCount: images.length,
             physics: const ScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
             ),
             itemBuilder: (context, index) {
@@ -49,7 +49,7 @@ class WeeklyPlanScreen extends StatelessWidget {
                         fit: BoxFit.cover,
                       )),
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 5),
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
                     color: Colors.black.withOpacity(0.3),
                     child: Align(
                         alignment: Alignment.bottomLeft,

@@ -3,13 +3,15 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:raynworkout/View/RegisterScreen.dart';
 import 'package:velocity_x/velocity_x.dart';
-
 import '../Common/ImageShade.dart';
 import '../Common/RoundButton.dart';
 import 'GenderScreen.dart';
 
-class LoginScren extends StatelessWidget {
-  const LoginScren({super.key});
+class LoginScreen extends StatelessWidget {
+  LoginScreen({super.key});
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -54,11 +56,13 @@ class LoginScren extends StatelessWidget {
                           .color(Colors.white)
                           .make()
                           .py(30),
-                      const Field(
+                      Field(
+                        controller: emailController,
                         hinttext: "Enter Email",
                         suffixIcon: Icons.email,
                       ).pOnly(bottom: 20),
-                      const Field(
+                      Field(
+                        controller: passwordController,
                         hinttext: "Enter Password",
                         suffixIcon: Icons.visibility,
                       ).pOnly(bottom: 10),
@@ -72,7 +76,7 @@ class LoginScren extends StatelessWidget {
                               .color(Colors.white)
                               .make()
                               .onTap(() {
-                            Get.to(const RegisterScreen());
+                            Get.to(RegisterScreen());
                           })
                         ],
                       ).pOnly(bottom: 30),
@@ -154,18 +158,20 @@ class SocialIcon extends StatelessWidget {
 }
 
 class Field extends StatelessWidget {
-  const Field({
-    super.key,
-    this.hinttext,
-    required this.suffixIcon,
-  });
-  // ignore: prefer_typing_uninitialized_variables
+  const Field(
+      {super.key,
+      this.hinttext,
+      required this.suffixIcon,
+      required this.controller});
+
   final hinttext;
   final IconData suffixIcon;
+  final controller;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       decoration: InputDecoration(
         hintText: "$hinttext",
         contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 15),

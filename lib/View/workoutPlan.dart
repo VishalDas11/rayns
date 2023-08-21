@@ -16,17 +16,18 @@ class WorkoutPlanScreen extends StatelessWidget {
         backgroundColor: AppColor.screenbackgroundColor,
         body: CustomAppBar(
           leadingicon: Icons.arrow_back,
-          title:
-              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-            Text(
-              "Hello Sarahas",
-              style: TextStyle(fontSize: 24, color: Colors.white),
-            ),
-            Text(
-              "Good Morning",
-              // style: TextStyle(fontSize: 11, color: Colors.white),
-            )
-          ]),
+          title: const Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "Hello Sarahas",
+                  style: TextStyle(fontSize: 24, color: Colors.white),
+                ),
+                Text(
+                  "Good Morning",
+                  // style: TextStyle(fontSize: 11, color: Colors.white),
+                )
+              ]),
           column: Column(
             children: [
               ImageCard(
@@ -40,7 +41,7 @@ class WorkoutPlanScreen extends StatelessWidget {
               RoundButton(
                   text: "Continue",
                   onpress: () {
-                    Get.to(WorkoutPlanScreen2());
+                    Get.to(() => const WorkoutPlanScreen2());
                   })
             ],
           ).px(20).py(20),
@@ -63,7 +64,7 @@ class ImageCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             border: border,
             //  Border.all(color: Colors.white, width: 2),
-            image: DecorationImage(
+            image: const DecorationImage(
               image: NetworkImage(
                   'https://images.pexels.com/photos/414029/pexels-photo-414029.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'),
               fit: BoxFit.cover,
@@ -73,16 +74,16 @@ class ImageCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             gradient: LinearGradient(colors: [
               Colors.black.withOpacity(0.6),
-              Color.fromARGB(255, 197, 17, 4).withOpacity(0.7),
+              const Color.fromARGB(255, 197, 17, 4).withOpacity(0.7),
             ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              "$title".text.size(20).white.make().pOnly(left: 10),
+              title.text.size(20).white.make().pOnly(left: 10),
               Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   width: double.infinity,
                   height: MediaQuery.of(context).size.height * 1 / 10,
                   child: Row(
@@ -95,7 +96,7 @@ class ImageCard extends StatelessWidget {
                                 .white
                                 .make(),
                       ),
-                      CircleAvatar(
+                      const CircleAvatar(
                         radius: 12,
                         backgroundColor: Colors.red,
                         child: Icon(

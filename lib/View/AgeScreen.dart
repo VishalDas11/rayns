@@ -68,7 +68,7 @@ class AgeScreen extends StatelessWidget {
                           Get.back();
                         },
                         onpress2: () {
-                          Get.to(const WeightScreen());
+                          Get.to(() => WeightScreen());
                         },
                       )
                     ],
@@ -93,6 +93,7 @@ class _NumPickState extends State<NumPick> {
 
   @override
   Widget build(BuildContext context) {
+    print("Build");
     return NumberPicker(
         selectedTextStyle: const TextStyle(
             fontSize: 36,

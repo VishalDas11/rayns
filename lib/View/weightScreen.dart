@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:numberpicker/numberpicker.dart';
 
 import 'package:velocity_x/velocity_x.dart';
 
@@ -58,15 +59,20 @@ class WeightScreen extends StatelessWidget {
                         .text
                         .color(Colors.white)
                         .make()
-                        .pOnly(bottom: 30),
-                    "54Kg"
-                        .text
-                        .size(36)
-                        .bold
-                        .color(Colors.white)
-                        .make()
-                        .centered()
-                        .pOnly(bottom: 50),
+                        .pOnly(bottom: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        NumPick(),
+                        "Kg"
+                            .text
+                            .size(30)
+                            .bold
+                            .color(Colors.white)
+                            .make()
+                            .centered(),
+                      ],
+                    ).pOnly(bottom: 10),
                     RowBtn(
                       onpress: () {
                         Get.back();
@@ -75,11 +81,51 @@ class WeightScreen extends StatelessWidget {
                         Get.to(() => const GoalScreen());
                       },
                     )
-                  ]).px(20).py(20),
+                  ]).px(20).py(10),
             ),
           ],
         )
       ]),
     );
+  }
+}
+
+class NumPick extends StatefulWidget {
+  const NumPick({super.key});
+
+  @override
+  State<NumPick> createState() => _NumPickState();
+}
+
+class _NumPickState extends State<NumPick> {
+  int _currentValue = 5;
+
+  @override
+  Widget build(BuildContext context) {
+    return NumberPicker(
+        itemHeight: 40,
+        itemWidth: 60,
+        selectedTextStyle: const TextStyle(
+            fontSize: 30,
+            color: Colors.white,
+            wordSpacing: 0,
+            letterSpacing: 0),
+        textStyle: const TextStyle(
+            color: Colors.white54, fontSize: 16, wordSpacing: 0),
+        itemCount: 5,
+        decoration: const BoxDecoration(
+          border: Border(
+              // top: BorderSide(color: Colors.red, width: 3),
+              // bottom: BorderSide(color: Colors.red, width: 3),
+              ),
+        ),
+        minValue: 0,
+        maxValue: 300,
+        value: _currentValue,
+        onChanged: (int value) {
+          setState(() {
+            _currentValue = value;
+          });
+        }).centered();
   }
 }

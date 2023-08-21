@@ -1,52 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-
 import 'package:get/get.dart';
 import 'package:raynworkout/View/AgeScreen.dart';
+import 'package:raynworkout/api%20services/GetxProvider.dart';
 
 import 'package:velocity_x/velocity_x.dart';
 
 import '../Common/ImageShade.dart';
 import '../Common/RowBtn.dart';
 
-class GenderScreen extends StatefulWidget {
+class GenderScreen extends StatelessWidget {
   GenderScreen({super.key});
 
-  @override
-  State<GenderScreen> createState() => _GenderScreenState();
-}
-
-class _GenderScreenState extends State<GenderScreen> {
-  int selectContainer = 1;
-
-  void selectedContainer(int index) {
-    setState(() {
-      selectContainer != index;
-    });
-  }
-
-  Widget custom(String text, int index) {
-    return GestureDetector(
-      onTap: () {
-        selectedContainer(1);
-      },
-      child: CircleAvatar(
-        radius: 40,
-        backgroundColor: selectContainer == 0 ? Colors.red : Colors.white,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.key,
-              size: 30,
-            ),
-            Text(text)
-          ],
-        ),
-      ),
-    );
-  }
+  final Controller getcontroller = Get.put(Controller());
 
   @override
   Widget build(BuildContext context) {
@@ -97,8 +62,35 @@ class _GenderScreenState extends State<GenderScreen> {
                         .color(Colors.white)
                         .make()
                         .pOnly(bottom: 30),
-                    custom("Male", 1).centered().pOnly(bottom: 20),
-                    custom("Female", 2).centered().pOnly(bottom: 30),
+                    GestureDetector(
+                      onTap: () {
+                        getcontroller.selectMale();
+                      },
+                      child: Obx(() {
+                        return CircleWidget(
+                                icon: Icons.male,
+                                isSelected: getcontroller.isMaleSelected.value,
+                                text: "Male",
+                                iconColor: getcontroller.isMaleSelected.value)
+                            .pOnly(bottom: 20)
+                            .centered();
+                      }),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        getcontroller.selectFemale();
+                      },
+                      child: Obx(() {
+                        return CircleWidget(
+                                icon: Icons.female,
+                                isSelected:
+                                    getcontroller.isFemaleSelected.value,
+                                text: "Female",
+                                iconColor: getcontroller.isFemaleSelected.value)
+                            .pOnly(bottom: 20)
+                            .centered();
+                      }),
+                    ),
                     RowBtn(
                       onpress: () {
                         Get.back();
@@ -118,40 +110,78 @@ class _GenderScreenState extends State<GenderScreen> {
   }
 }
 
-class GenderBtn extends StatelessWidget {
-  const GenderBtn(
-      {super.key,
-      required this.color,
-      required this.backColor,
-      this.textColro,
-      required this.onpress,
-      required this.text});
-  final Color color;
-  final Color backColor;
-  final Color? textColro;
-  final text;
-  final VoidCallback onpress;
+class CircleWidget extends StatelessWidget {
+  const CircleWidget({
+    super.key,
+    required this.isSelected,
+    required this.text,
+    required this.iconColor,
+    required this.icon,
+  });
+  final int isSelected;
+  final String text;
+  final int iconColor;
+  final IconData icon;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onpress,
-      child: CircleAvatar(
-        backgroundColor: backColor,
-        radius: 40,
-        child: Column(
+    return CircleAvatar(
+      radius: 50,
+      backgroundColor: isSelected == 1 ? Colors.red : Colors.white,
+      child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Icon(
-              Icons.key,
-              size: 30,
-              color: color,
+            Text(
+              text,
+              style: TextStyle(
+                  color: isSelected == 1 ? Colors.white : Colors.black,
+                  fontWeight: FontWeight.w500),
             ),
-            "$text".text.bold.color(textColro).make()
-          ],
-        ),
-      ),
+            Icon(
+              icon,
+              color: isSelected == 1 ? Colors.white : Colors.black,
+              size: 35,
+            )
+          ]),
     );
   }
 }
+
+// class GenderBtn extends StatelessWidget {
+//   const GenderBtn(
+//       {super.key,
+//       required this.color,
+//       required this.backColor,
+//       this.textColro,
+//       required this.onpress,
+//       required this.text});
+//   final Color color;
+//   final Color backColor;
+//   final Color? textColro;
+//   final text;
+//   final VoidCallback onpress;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return GestureDetector(
+//       onTap: onpress,
+//       child: CircleAvatar(
+//         backgroundColor: backColor,
+//         radius: 40,
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           crossAxisAlignment: CrossAxisAlignment.center,
+//           children: [
+//             Icon(
+//               Icons.key,
+//               size: 30,
+//               color: color,
+//             ),
+//             "$text".text.bold.color(textColro).make()
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }

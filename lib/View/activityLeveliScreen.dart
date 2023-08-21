@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:raynworkout/api%20services/GetxProvider.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../Common/ImageShade.dart';
@@ -12,6 +13,7 @@ class ActivityScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("Build");
     return Scaffold(
       body: Stack(alignment: Alignment.bottomCenter, children: [
         const ImageShade(),
@@ -90,40 +92,47 @@ class GoalList extends StatefulWidget {
 }
 
 class _GoalListState extends State<GoalList> {
-  @override
-  final list = [
-    'Beginer',
-    'Intermediate',
-    'Advance',
-    'Rookie',
-    'Trust beast',
-  ];
-  int index = 0;
+  Controller getxcontroller = Get.put(Controller());
+  // final list = [
+  //   'Beginer',
+  //   'Intermediate',
+  //   'Advance',
+  //   'Rookie',
+  //   'Trust beast',
+  // ];
+  // int index = 0;
   @override
   Widget build(BuildContext context) {
-    return CupertinoPicker(
-      itemExtent: 60,
-      // squeeze: 1.5,
-      // looping: true,
-      children: list
-          .map((item) => Center(
-                child: Text(
-                  item,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
+    print("Build activity");
+    return Obx(() {
+      return CupertinoPicker(
+        itemExtent: 60,
+        scrollController: FixedExtentScrollController(initialItem: 2),
+        onSelectedItemChanged: (index) {
+          getxcontroller.update();
+        },
+        children: getxcontroller.activityList
+            .map((item) => Center(
+                  child: Text(
+                    item,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                    ),
                   ),
-                ),
-              ))
-          .toList(),
-      scrollController: FixedExtentScrollController(initialItem: 2),
-      onSelectedItemChanged: (index) {
-        setState(() {
-          this.index = index;
-        });
-        final item = list[index];
-        print("Selected item is : ${item}");
-      },
-    );
+                ))
+            .toList(),
+        // onSelectedItemChanged: (index) {
+        //   getxcontroller.selectactivity(index);
+        // }
+        // onSelectedItemChanged: (index) {
+        //   setState(() {
+        //     this.index = index;
+        //   });
+        //   final item = list[index];
+        //   print("Selected item is : ${item}");
+        // },
+      );
+    });
   }
 }

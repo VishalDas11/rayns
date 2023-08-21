@@ -32,8 +32,8 @@ class WeeklyTraningScreen extends StatelessWidget {
             // scrollDirection: Axis.vertical,
             shrinkWrap: true,
             itemCount: images.length,
-            physics: ScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            physics: const ScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
             ),
             itemBuilder: (context, index) {

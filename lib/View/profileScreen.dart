@@ -24,7 +24,7 @@ class ProfileScreen extends StatelessWidget {
                 height: MediaQuery.of(context).size.height * 1 / 1.4,
                 decoration: const BoxDecoration(
                     color: Color(0xFF031A28),
-                    borderRadius: const BorderRadius.only(
+                    borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(50),
                       topRight: Radius.circular(50),
                     ),
@@ -131,7 +131,7 @@ class ProfileScreen extends StatelessWidget {
                       icon: Icons.arrow_forward_ios,
                     ),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
                       width: double.infinity,
                       height: MediaQuery.of(context).size.height * 1 / 8,
                       decoration: BoxDecoration(
@@ -200,7 +200,7 @@ class ProfileScreen extends StatelessWidget {
           ],
         ),
         // TODO  Image Circle
-        Positioned(
+        const Positioned(
           top: 50,
           //  bottom: 450,
           child: CircleImage(),
@@ -210,6 +210,7 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
+// ignore: camel_case_types
 class tile extends StatelessWidget {
   const tile(
       {super.key,
@@ -230,7 +231,7 @@ class tile extends StatelessWidget {
         style: TextStyle(color: color, fontSize: 14),
       ),
       trailing: Icon(icon, color: Colors.white),
-      visualDensity: VisualDensity(vertical: -4),
+      visualDensity: const VisualDensity(vertical: -4),
       dense: true,
     );
   }
